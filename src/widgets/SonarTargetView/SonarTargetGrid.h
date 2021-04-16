@@ -17,6 +17,8 @@ public:
                        QWidget *widget) override;
 
     QPointF getCenter() const; // Получение центра мишени
+    int getRingRadius1() const; // Радиус внешней границы 100-пиксельного кольца
+    int getRingRadius2() const; // Радиус внутренней границы 100-пиксельного кольца
 
     virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *e) override;
 
@@ -27,6 +29,8 @@ signals:
     void setDist(int dist);
 private:
     QRectF m_boundingRect;
+    int m_ringRadius1;
+    int m_ringRadius2;
 };
 
 #endif // SONAR_TARGET_GRID_H
