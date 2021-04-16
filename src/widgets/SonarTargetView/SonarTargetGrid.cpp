@@ -60,6 +60,9 @@ void SonarTargetGrid::paint(QPainter *painter,
     painter->setPen(QPen(Qt::green));
     for (int i = 0; i <= mainRadius/100; i++) {
         painter->drawEllipse(QPoint(mainRadius + painter->pen().width(), mainRadius + painter->pen().width()), 100*i, 100*i);
+
+        if (i == mainRadius/100)     m_ringRadius1 = 100*i;
+        if (i == mainRadius/100 - 1) m_ringRadius2 = 100*i;
     }
 
     painter->setPen(QPen(Qt::green, 1, Qt::DashLine));
@@ -77,6 +80,14 @@ void SonarTargetGrid::paint(QPainter *painter,
 QPointF SonarTargetGrid::getCenter() const {
     return QPointF(boundingRect().width()/2,
                    boundingRect().height()/2);
+}
+
+int SonarTargetGrid::getRingRadius1() const {
+    return m_ringRadius1;
+}
+
+int SonarTargetGrid::getRingRadius2() const {
+    return m_ringRadius2;
 }
 
 void SonarTargetGrid::mouseMoveEvent(QGraphicsSceneMouseEvent *e) {

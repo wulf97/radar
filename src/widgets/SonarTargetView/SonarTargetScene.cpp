@@ -100,7 +100,8 @@ void SonarTargetScene::addTarget() {
     // Добавление целей на мишень
     if (m_targets.size() < N_TARGETS) {
         QPointF center = m_targetGrid->getCenter();
-        SonarTarget *target = new SonarTarget(center, std::rand()%200, std::rand()%360, m_targetGrid);
+        SonarTarget *target = new SonarTarget(center, std::rand()%(m_targetGrid->getRingRadius1() - m_targetGrid->getRingRadius2()) + m_targetGrid->getRingRadius2(),
+                                              std::rand()%360, m_targetGrid);
 
         emit targetPos(target->getId(), target->getPolarPoint());
 
