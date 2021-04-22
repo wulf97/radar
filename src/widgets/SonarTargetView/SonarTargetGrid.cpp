@@ -34,7 +34,8 @@ QPainterPath SonarTargetGrid::shape() const {
 void SonarTargetGrid::paint(QPainter *painter,
                             const QStyleOptionGraphicsItem *option,
                             QWidget *widget) {
-//    qDebug() << "SonarTargetGrid::paint()";
+    Q_UNUSED(option)
+    Q_UNUSED(widget)
 
     painter->save();
 
@@ -94,26 +95,12 @@ void SonarTargetGrid::mouseMoveEvent(QGraphicsSceneMouseEvent *e) {
     if (shape().contains(e->scenePos())) {
         int x = e->scenePos().x() - m_boundingRect.width()/2;
         int y = m_boundingRect.height()/2 - e->scenePos().y();
-        int peleng;
-        int dist = qSqrt(x*x + y*y);
 
-        if (x) {
-            peleng = qRadiansToDegrees(qAtan(static_cast<double>(y)/x));
+        int dist = hypot(x, y);
+        int peleng = qRadiansToDegrees(qAtan2(y, x));
 
-            if (y > 0) {
-                if (x < 0) peleng += 180;
-            } else {
-                if (x < 0) {
-                    peleng += 180;
-                } else {
-                    peleng += 360;
-                }
-            }
-        } else {
-            if (y > 0)
-                peleng = 90;
-            else
-                peleng = 270;
+        if (y < 0) {
+            peleng = 360 + peleng;
         }
 
         emit setXPos(x);

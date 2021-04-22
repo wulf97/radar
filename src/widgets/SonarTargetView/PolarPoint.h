@@ -1,14 +1,11 @@
 #ifndef POLAR_POINT_H
 #define POLAR_POINT_H
 
-#include <QObject>
-
 class QPointF;
 
-class PolarPoint : public QObject {
-    Q_OBJECT
+class PolarPoint {
 public:
-    PolarPoint(qreal dist = 0, qreal peleng = 0, QObject *parent = nullptr);
+    PolarPoint(qreal dist = 0, qreal peleng = 0);
     PolarPoint(const PolarPoint &point);
     ~PolarPoint();
 
@@ -18,8 +15,8 @@ public:
     QPointF getQPointF(const QPointF &center) const;
     qreal getDist() const;
     qreal getPeleng() const;
-    qreal getX(const QPointF &center) const;
-    qreal getY(const QPointF &center) const;
+    qreal getX() const;
+    qreal getY() const;
 
 private:
     qreal m_dist;

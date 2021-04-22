@@ -86,8 +86,8 @@ void SonarControl::setDist(int dist) {
 
 void SonarControl::targetPos(int nTarget, PolarPoint point) {
     QStringList data = QStringList()
-                       << QString("%1").arg(point.getX(m_center))
-                       << QString("%1").arg(point.getY(m_center))
+                       << QString("%1").arg(point.getX())
+                       << QString("%1").arg(point.getY())
                        << QString("%1").arg(point.getPeleng())
                        << QString("%1").arg(point.getDist());
 

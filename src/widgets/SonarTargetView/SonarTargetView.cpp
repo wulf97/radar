@@ -40,6 +40,8 @@ SonarTargetView::~SonarTargetView() {
 }
 
 void SonarTargetView::resizeEvent(QResizeEvent *e) {
+    Q_UNUSED(e)
+
     scene()->setSceneRect(0, 0, width() - 10, height() - 10);
 
     emit setCenter(qobject_cast<SonarTargetScene*>(scene())->getCenter());

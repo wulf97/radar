@@ -40,6 +40,10 @@ SonarTargetScene::~SonarTargetScene() {
 
     delete m_updateTimer;
     delete m_addTargetTimer;
+
+    for (auto target : m_targets) {
+        delete target;
+    }
 }
 
 SonarTargetGrid *SonarTargetScene::getTargetGrid() const {
@@ -50,6 +54,8 @@ SonarTarget *SonarTargetScene::getTarget(int nTarget) const {
     if (nTarget <= m_targets.size() && nTarget > 0) {
         return m_targets.at(nTarget - 1);
     }
+
+    return nullptr;
 }
 
 QPointF SonarTargetScene::getCenter() const {

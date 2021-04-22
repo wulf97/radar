@@ -3,7 +3,7 @@
 
 #include "PolarPoint.h"
 
-PolarPoint::PolarPoint(qreal dist, qreal peleng, QObject *parent) : QObject(parent) {
+PolarPoint::PolarPoint(qreal dist, qreal peleng) {
     m_dist = dist;
     m_peleng = peleng;
 }
@@ -25,31 +25,13 @@ void PolarPoint::operator = (const PolarPoint &point) {
 void PolarPoint::setXY(const QPointF &center, qreal xPos, qreal yPos) {
     qreal x = xPos - center.x();
     qreal y = center.y() - yPos;
-    qreal peleng;
-    qreal dist = qSqrt(x*x + y*y);
 
+    m_dist = hypot(x, y);
+    m_peleng = qRadiansToDegrees(qAtan2(y, x));
 
-    if (x) {
-        peleng = qRadiansToDegrees(qAtan(static_cast<double>(y)/x));
-
-        if (y > 0) {
-            if (x < 0) peleng += 180;
-        } else {
-            if (x < 0) {
-                peleng += 180;
-            } else {
-                peleng += 360;
-            }
-        }
-    } else {
-        if (y > 0)
-            peleng = 90;
-        else
-            peleng = 270;
+    if (y < 0) {
+        m_peleng = 360 + m_peleng;
     }
-
-    m_dist = dist;
-    m_peleng = peleng;
 }
 
 QPointF PolarPoint::getQPointF(const QPointF &center) const {
@@ -73,7 +55,7 @@ qreal PolarPoint::getPeleng() const {
     return m_peleng;
 }
 
-qreal PolarPoint::getX(const QPointF &center) const {
+qreal PolarPoint::getX() const {
     qreal x {0};
 
     x = m_dist*qCos(qDegreesToRadians(m_peleng));
@@ -81,7 +63,7 @@ qreal PolarPoint::getX(const QPointF &center) const {
     return x;
 }
 
-qreal PolarPoint::getY(const QPointF &center) const {
+qreal PolarPoint::getY() const {
     qreal y {0};
 
     y = m_dist*qSin(qDegreesToRadians(m_peleng));

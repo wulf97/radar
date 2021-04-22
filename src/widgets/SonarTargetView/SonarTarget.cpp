@@ -60,6 +60,9 @@ QPainterPath SonarTarget::shape() const  {
 void SonarTarget::paint(QPainter *painter,
                         const QStyleOptionGraphicsItem *option,
                         QWidget *widget) {
+    Q_UNUSED(option)
+    Q_UNUSED(widget)
+
     painter->save();
 
     painter->setPen(QPen(Qt::GlobalColor(m_color)));
@@ -84,6 +87,8 @@ void SonarTarget::paint(QPainter *painter,
 }
 
 void SonarTarget::mousePressEvent(QGraphicsSceneMouseEvent *e) {
+    Q_UNUSED(e)
+
     emit targetClick(m_id);
 }
 
