@@ -6,6 +6,7 @@
 
 class SonarTargetGrid : public QObject, public QGraphicsItem {
     Q_OBJECT
+    Q_INTERFACES(QGraphicsItem)
 public:
     SonarTargetGrid(QGraphicsItem *parent = nullptr);
     virtual ~SonarTargetGrid();

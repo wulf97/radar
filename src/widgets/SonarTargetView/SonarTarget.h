@@ -8,6 +8,7 @@
 
 class SonarTarget : public QObject, public QGraphicsItem {
     Q_OBJECT
+    Q_INTERFACES(QGraphicsItem)
 public:
     SonarTarget(const QPointF &center,
                 qreal dist,
